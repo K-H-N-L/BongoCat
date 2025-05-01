@@ -9,6 +9,7 @@ export const useCatStore = defineStore('cat', () => {
   const penetrable = ref(false)
   const opacity = ref(100)
   const mirrorMode = ref(false)
+  const language = ref('zh')
 
   return {
     mode,
@@ -16,5 +17,6 @@ export const useCatStore = defineStore('cat', () => {
     penetrable,
     opacity,
     mirrorMode,
+    language,
   }
 })

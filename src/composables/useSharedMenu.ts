@@ -1,6 +1,7 @@
 import type { CatMode } from '@/stores/cat'
 
 import { CheckMenuItem, MenuItem, PredefinedMenuItem, Submenu } from '@tauri-apps/api/menu'
+import { useI18n } from 'vue-i18n'
 
 import { hideWindow, showWindow } from '@/plugins/window'
 import { useCatStore } from '@/stores/cat'
@@ -11,11 +12,24 @@ interface ModeOption {
   value: CatMode
 }
 
+interface LanguageOption {
+  label: string
+  value: string
+}
+
 export function useSharedMenu() {
+  const { t, locale } = useI18n()
+
   const catStore = useCatStore()
+
   const modeOptions: ModeOption[] = [
-    { label: '标准模式', value: 'standard' },
-    { label: '键盘模式', value: 'keyboard' },
+    { label: t('cat.mode.standard'), value: 'standard' },
+    { label: t('cat.mode.keyboard'), value: 'keyboard' },
+  ]
+
+  const languageOptions: LanguageOption[] = [
+    { label: '中文', value: 'zh' },
+    { label: 'English', value: 'en' },
   ]
 
   const getOpacityMenuItems = async () => {
@@ -45,12 +59,12 @@ export function useSharedMenu() {
   const getSharedMenu = async () => {
     return await Promise.all([
       MenuItem.new({
-        text: '偏好设置...',
+        text: t('cat.settings'),
         accelerator: isMac ? 'Cmd+,' : '',
         action: () => showWindow('preference'),
       }),
       MenuItem.new({
-        text: catStore.visible ? '隐藏猫咪' : '显示猫咪',
+        text: catStore.visible ? t('cat.hide') : t('cat.show'),
         action: () => {
           if (catStore.visible) {
             hideWindow('main')
@@ -63,7 +77,7 @@ export function useSharedMenu() {
       }),
       PredefinedMenuItem.new({ item: 'Separator' }),
       Submenu.new({
-        text: '猫咪模式',
+        text: t('cat.mode.title'),
         items: await Promise.all(
           modeOptions.map((item) => {
             return CheckMenuItem.new({
@@ -77,22 +91,38 @@ export function useSharedMenu() {
         ),
       }),
       CheckMenuItem.new({
-        text: '窗口穿透',
+        text: t('cat.window.penetrable'),
         checked: catStore.penetrable,
         action: () => {
           catStore.penetrable = !catStore.penetrable
         },
       }),
       Submenu.new({
-        text: '不透明度',
+        text: t('cat.window.opacity'),
         items: await getOpacityMenuItems(),
       }),
       CheckMenuItem.new({
-        text: '镜像模式',
+        text: t('cat.window.mirror'),
         checked: catStore.mirrorMode,
         action: () => {
           catStore.mirrorMode = !catStore.mirrorMode
         },
+      }),
+      PredefinedMenuItem.new({ item: 'Separator' }),
+      Submenu.new({
+        text: '语言 / Language',
+        items: await Promise.all(
+          languageOptions.map((item) => {
+            return CheckMenuItem.new({
+              text: item.label,
+              checked: catStore.language === item.value,
+              action: () => {
+                catStore.language = item.value
+                locale.value = item.value
+              },
+            })
+          }),
+        ),
       }),
     ])
   }
