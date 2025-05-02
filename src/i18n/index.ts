@@ -9,9 +9,9 @@ const messages = {
 }
 
 const i18n = createI18n({
-  legacy: false, // 使用组合式 API
-  locale: 'zh', // 默认语言
-  fallbackLocale: 'en', // 回退语言
+  legacy: false,
+  locale: 'zh',
+  fallbackLocale: 'en',
   messages,
 })
 

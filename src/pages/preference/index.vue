@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Flex } from 'ant-design-vue'
 import { computed, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import About from './components/about/index.vue'
 import Cat from './components/cat/index.vue'
@@ -12,6 +13,7 @@ import { useTray } from '@/composables/useTray'
 import { useAppStore } from '@/stores/app'
 import { isMac } from '@/utils/platform'
 
+const { t } = useI18n()
 const { createTray } = useTray()
 const appStore = useAppStore()
 const current = ref(0)
@@ -22,22 +24,22 @@ onMounted(async () => {
 
 const menus = [
   {
-    label: '猫咪设置',
+    label: t('cat.settings'),
     icon: 'i-solar:cat-bold',
     component: Cat,
   },
   {
-    label: '通用设置',
+    label: t('general.settings'),
     icon: 'i-solar:settings-minimalistic-bold',
     component: General,
   },
   {
-    label: '模型管理',
+    label: t('model.management'),
     icon: 'i-solar:magic-stick-3-bold',
     component: Model,
   },
   {
-    label: '关于',
+    label: t('about.software'),
     icon: 'i-solar:info-circle-bold',
     component: About,
   },

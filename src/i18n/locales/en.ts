@@ -5,6 +5,10 @@ export default {
       name: 'BongoCat',
     },
   },
+  app: {
+    restart: 'Restart App',
+    exit: 'Exit App',
+  },
   // Cat settings page
   cat: {
     settings: 'Cat Settings',
@@ -12,14 +16,18 @@ export default {
     hide: 'Hide Cat',
     mode: {
       title: 'Cat Mode',
+      select: 'Select Mode',
       standard: 'Standard Mode',
       keyboard: 'Keyboard Mode',
     },
     window: {
+      title: 'Window Settings',
+      penetrableDesc: 'When enabled, the window does not affect operations on other applications',
       penetrable: 'Window Penetration',
       opacity: 'Opacity',
       mirror: 'Mirror Mode',
     },
+    redrawing: 'Redrawing...',
   },
   // General settings page
   general: {
@@ -56,5 +64,6 @@ export default {
     changelog: 'Changelog:',
     checking: 'Checking for updates...',
     latest: 'Already the latest version 🎉',
+    checkUpdate: 'Check for Updates',
   },
 }

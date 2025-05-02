@@ -5,21 +5,29 @@ export default {
       name: 'BongoCat',
     },
   },
+  app: {
+    restart: '重启应用',
+    exit: '退出应用',
+  },
   // 猫咪设置页面
   cat: {
     settings: '偏好设置...',
     show: '显示猫咪',
     hide: '隐藏猫咪',
     mode: {
+      select: '选择模式',
       title: '猫咪模式',
       standard: '标准模式',
       keyboard: '键盘模式',
     },
     window: {
+      title: '窗口设置',
+      penetrableDesc: '启用后，窗口不影响对其他应用程序的操作',
       penetrable: '窗口穿透',
       opacity: '不透明度',
       mirror: '镜像模式',
     },
+    redrawing: '重绘中...',
   },
   // 通用设置页面
   general: {
@@ -56,5 +64,6 @@ export default {
     changelog: '更新日志：',
     checking: '正在检查更新...',
     latest: '当前已是最新版本🎉',
+    checkUpdate: '检查更新',
   },
 }

@@ -5,7 +5,7 @@
   "identifier": "com.ayangweb.BongoCat",
   "build": {
     "beforeDevCommand": "pnpm dev",
-    "devUrl": "http://localhost:1420",
+    "devUrl": "http://localhost:1520",
     "beforeBuildCommand": "pnpm build",
     "frontendDist": "../dist"
   },
@@ -29,7 +29,7 @@
       },
       {
         "label": "preference",
-        "title": "偏好设置",
+        "title": "Cat Settings",
         "url": "index.html/#/preference",
         "visible": false,
         "resizable": false,
